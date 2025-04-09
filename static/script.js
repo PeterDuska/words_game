@@ -28,6 +28,17 @@ window.addEventListener('resize', () => {
     }
 });
 
+const inputs = document.querySelectorAll('input');
+
+inputs.forEach(input => {
+  input.addEventListener('focus', () => {
+    document.body.classList.add('keyboard-open');
+  });
+  input.addEventListener('blur', () => {
+    document.body.classList.remove('keyboard-open');
+  });
+});
+
 function buildGame() {
     const game = document.getElementById("game");
     const ladder = ladders[currentLadder];

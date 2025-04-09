@@ -121,23 +121,31 @@ body
 }
 
 /* Definition */
-#definition-box {
+#definition-wrapper {
     position: fixed;
-    bottom: env(keyboard-inset-height, 100px); /* works on iOS & Android */
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
-    max-width: 90%;
-    text-align: center;
+    width: 100%;
+    pointer-events: none;
+    z-index: 5;
+    bottom: 100px; /* default spacing */
+    display: flex;
+    justify-content: center;
+  }
+
+  #definition-box {
     font-size: 22px;
     font-weight: 600;
     padding: 10px 20px;
+    max-width: 90%;
+    text-align: center;
     color: #111;
-    z-index: 5;
     background: none;
-    pointer-events: none;
+    pointer-events: auto;
+    transition: transform 0.3s ease;
   }
 
+  body.keyboard-open #definition-wrapper {
+    bottom: 200px; /* lift the definition higher when keyboard is visible */
+  }
 #definition-box::before {
   content: "";
   display: block;
