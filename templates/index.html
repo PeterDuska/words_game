@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Word Ladder</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="/static/script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<audio id="correct-sound" src="/static/sounds/correct.mp3" preload="auto"></audio>
+<audio id="wrong-sound" src="/static/sounds/wrong.mp3" preload="auto"></audio>
+
+<body>
+  <div class="overlay-top"></div>
+  <div class="overlay-bottom"></div>
+
+  <div class="overlay-top"></div>
+  <div class="overlay-bottom"></div>
+
+  <div id="viewport">
+    <div id="game">
+      <!-- word rows inserted here -->
+    </div>
+  </div>
+
+  <div id="definition-box">Loading definition...</div>
+
+  <div id="how-to-play">
+    <div class="content">
+      <h2>How to Play</h2>
+      <p>
+        Start by guessing the first word based on the definition at the bottom.<br><br>
+        Each guess must be a valid word that matches the definition.<br><br>
+        When your guess is correct, the next word in the ladder appears and you’ll be given a new definition.<br><br>
+        Each new word differs from the last by one letter (or by adding/removing one letter).<br><br>
+        Complete the ladder to win!
+      </p>
+      <button onclick="closeHowToPlay()">Got it!</button>
+    </div>
+  </div>
+
+  <div id="win-screen">
+    <h1>You completed the ladder! 🎉</h1>
+    <button onclick="replayGame()">Play Again</button>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</html>

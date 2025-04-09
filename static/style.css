@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+
+html, body
+{
+    -webkit-overflow-scrolling: touch;
+}
+
+body
+{
+    -webkit-overflow-scrolling: touch;
+    margin: 0;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0, #eaeaea, #f8f8f8);
+    background-size: 600% 600%;
+    animation: bgShift 20s ease infinite;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    color: #111;
+    /*
+    transition: background 0.5s ease;*/
+    font-family: 'Inter', sans-serif;
+}
+
+@keyframes bgShift
+{
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+
+#viewport {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.4s ease;
+  }
+
+  #game-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    transition: transform 0.4s ease;
+  }
+
+
+
+/* Word rows */
+.word-row {
+  display: flex;
+  margin: 10px 0;
+  opacity: 0.25;
+  transform: scale(0.98);
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.word-row.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Letter boxes */
+.letter-box {
+  width: 64px;
+  height: 64px;
+  margin: 4px;
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background: white;
+  color: #111;
+  transition: all 0.2s ease;
+  font-family: 'Space Mono', monospace;
+}
+
+.letter-box.correct {
+  background: #5cc578;
+  border-color: #5cc578;
+}
+
+/* Wave animation on correct guess */
+.wave {
+  animation: wave 0.5s ease forwards;
+}
+
+@keyframes wave {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Shake animation on incorrect guess */
+.shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+/* Definition */
+#definition-box {
+    position: fixed;
+    bottom: 100px; /* adjust this if you want it higher/lower */
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 90%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 10px 20px;
+    color: #111;
+    z-index: 5;
+    background: none; /* or a subtle background if needed */
+}
+
+#definition-box::before {
+  content: "";
+  display: block;
+  width: 60%;
+  margin: 0 auto 12px;
+  border-top: 2px solid #555;
+  opacity: 0.4;
+}
+
+/* Top and bottom overlays for fade */
+.overlay-top,
+.overlay-bottom {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.overlay-top {
+  top: 0;
+  background: linear-gradient(to bottom, white 0%, transparent 100%);
+}
+
+.overlay-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, white 0%, transparent 100%);
+}
+
+.word-row.active {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 4px;
+  }
+
+  #win-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+  }
+
+  #win-screen h1 {
+    font-size: 42px;
+    color: #111;
+    margin-bottom: 20px;
+  }
+
+  #win-screen button {
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    background: #111;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  #win-screen button:hover {
+    background: #333;
+  }
+
+  #how-to-play {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    display: none; /* override default display */
+  }
+
+  #how-to-play .content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 500px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+
+  #how-to-play h2 {
+    margin-top: 0;
+    font-size: 28px;
+    color: #111;
+  }
+
+  #how-to-play p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  #how-to-play button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #111;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #how-to-play button:hover {
+    background: #333;
+  }
+
+  .letter-box.locked {
+    background: #fffb20;
+    border-color: #fffb20;
+    color: #111;
+    animation: hint-pop 0.3s ease;
+  }
+
+  @keyframes hint-pop {
+    0%   { transform: rotate(0.9); opacity: 0; }
+    50%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+
+
+  @media (max-width: 500px) {
+    .letter-box {
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+    }
+
+    #definition-box {
+      font-size: 18px;
+      bottom: 80px;
+    }
+
+    #win-screen h1 {
+      font-size: 28px;
+    }
+
+    #win-screen button {
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+  }
