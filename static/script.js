@@ -18,6 +18,16 @@ window.onload = async () => {
   buildGame();
 };
 
+window.addEventListener('resize', () => {
+    const defBox = document.getElementById('definition-box');
+    if (window.innerHeight < 500) {
+      // Keyboard is probably open
+      defBox.style.bottom = '200px';
+    } else {
+      defBox.style.bottom = '100px';
+    }
+});
+
 function buildGame() {
     const game = document.getElementById("game");
     const ladder = ladders[currentLadder];
